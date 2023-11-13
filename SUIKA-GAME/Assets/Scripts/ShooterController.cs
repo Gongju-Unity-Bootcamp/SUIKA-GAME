@@ -6,19 +6,19 @@ using UnityEngine;
 
 public class ShooterController : MonoBehaviour
 {
-    [SerializeField] private GameObject planet;
+    [SerializeField] private PlanetGameObjects planetList;
     [SerializeField] private Transform spawnPoint;
 
     [SerializeField] private float shooterSpeed = 30f;
     [SerializeField] private float shootPower = 1500f;
+    [SerializeField] private GameObject planetStorage;
 
     private float shooterRange = 4.3f;
-
-    private GameObject stuff;
+    private int planetListCount;
 
     private void Start()
     {
-        stuff = new GameObject("Planet");
+        planetListCount = planetList.planetPrefabCount;
     }
 
     private void Update()
@@ -54,8 +54,9 @@ public class ShooterController : MonoBehaviour
 
     private void OnShoot()
     {
-        GameObject _planet = Instantiate(planet, spawnPoint.position, spawnPoint.rotation);
+        int _randomNumber = UnityEngine.Random.Range(0, planetListCount);
+        GameObject _planet = Instantiate(planetList.planetPrefab[_randomNumber], spawnPoint.position, spawnPoint.rotation);
         _planet.GetComponent<Rigidbody2D>().AddForce(_planet.transform.up * shootPower);
-        _planet.transform.parent = stuff.transform;
+        _planet.transform.parent = planetStorage.transform;
     }
 }
