@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MercuryController : MonoBehaviour
+public class Mercury : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,6 +14,7 @@ public class MercuryController : MonoBehaviour
     void Update()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = mousePos; 
+        mousePos.z = 0;
+        transform.position = Vector3.Lerp(transform.position, mousePos, 0.01f); 
     }
 }
