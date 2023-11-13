@@ -3,12 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Square
+  - Planet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Reflect
   - Water
   - UI
   - 
