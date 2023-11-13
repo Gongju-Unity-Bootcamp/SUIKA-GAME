@@ -3,23 +3,24 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GAMEOVERText : MonoBehaviour
+public class GameOverTextEffect : MonoBehaviour
 {
-    Text flashingText;
+    private Text flashingText;
     
-    void Start()
+    private void Start()
     {
         flashingText = GetComponent<Text>();
         StartCoroutine(BlinkText());
     }
+
     public IEnumerator BlinkText()
     {
         while (true)
         {
             flashingText.text = "";
-            yield return new WaitForSeconds(.3f);
+            yield return new WaitForSeconds(0.3f);
             flashingText.text = "GAME OVER";
-            yield return new WaitForSeconds(.3f);
+            yield return new WaitForSeconds(0.3f);
         }
     }
 }
