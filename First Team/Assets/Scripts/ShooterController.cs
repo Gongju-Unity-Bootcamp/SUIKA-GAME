@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class ShooterController : MonoBehaviour
 {
-    public GameObject planet;
-    public Transform spawnPoint;
-    public float tiltAngle = 30f;
-    public float angleRange = 0.5f;
-    public float shootPower = 1500f;
+    [SerializeField] private GameObject planet;
+    [SerializeField] private Transform spawnPoint;
+
+    [SerializeField] private float tiltAngle = 30f;
+    [SerializeField] private float angleRange = 0.5f;
+    [SerializeField] private float shootPower = 1500f;
+
+    private GameObject stuff;
 
     private void Start()
     {
-
+        stuff = new GameObject("Planet");
     }
 
     private void Update()
@@ -40,6 +43,7 @@ public class ShooterController : MonoBehaviour
     {
         GameObject _planet = Instantiate(planet, spawnPoint.position, spawnPoint.rotation);
         _planet.GetComponent<Rigidbody2D>().AddForce(_planet.transform.up * shootPower);
+        _planet.transform.parent = stuff.transform;
     }
 
     private void OnLeftRotate()
