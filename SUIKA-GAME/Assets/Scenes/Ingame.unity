@@ -626,10 +626,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4dd6adcf3174a743a5764c06768c0c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planet: {fileID: 3180857480967778363, guid: fe0784d84c69d3f4e962f8a8cb3336c6, type: 3}
+  planet: {fileID: 4865273816614152813, guid: e3bd8bfb57c98064bb833ab7f5e88ef0, type: 3}
   spawnPoint: {fileID: 506372201}
-  tiltAngle: 30
-  angleRange: 0.5
+  shooterSpeed: 30
+  shooterRange: 4.4
   shootPower: 1500
 --- !u!1 &506372200
 GameObject:
@@ -1639,7 +1639,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1968243219}
   - component: {fileID: 1968243218}
-  - component: {fileID: 1968243220}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -1676,19 +1675,6 @@ Transform:
   - {fileID: 404213858}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1968243220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1968243217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d2e84f63b4000844a5a69b10fb7e437, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planetCursor: 0
 --- !u!1 &2062943644
 GameObject:
   m_ObjectHideFlags: 0
