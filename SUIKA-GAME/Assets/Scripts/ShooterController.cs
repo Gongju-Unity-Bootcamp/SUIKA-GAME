@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class ShooterController : MonoBehaviour
@@ -9,8 +10,9 @@ public class ShooterController : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
 
     [SerializeField] private float shooterSpeed = 30f;
-    [SerializeField] private float shooterRange = 4.4f;
     [SerializeField] private float shootPower = 1500f;
+
+    private float shooterRange = 4.3f;
 
     private GameObject stuff;
 
@@ -21,13 +23,33 @@ public class ShooterController : MonoBehaviour
 
     private void Update()
     {
+        OnMouseCursor();
         OnMouseInput();
+    }
+
+    private void OnMouseCursor()
+    {
+        float _horizontal = Input.GetAxis("Mouse X");
+        float _speed = _horizontal * Time.deltaTime * shooterSpeed;
+
+        transform.Translate(new Vector3(_speed, 0, 0));
+
+        if (transform.position.x > shooterRange)
+        {
+            transform.position = new Vector3(shooterRange, transform.position.y, 0);
+        }
+        if (transform.position.x < -shooterRange)
+        {
+            transform.position = new Vector3(-shooterRange, transform.position.y, 0);
+        }
     }
 
     private void OnMouseInput()
     {
-        float horizontal = Input.GetAxis("Mouse X");
-        transform.Translate(new Vector3(horizontal * Time.deltaTime * shooterSpeed, 0, 0));
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            OnShoot();
+        }
     }
 
     private void OnShoot()
