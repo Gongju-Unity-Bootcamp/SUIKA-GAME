@@ -8,6 +8,7 @@ public class Planet : MonoBehaviour
     public bool isMerged;
     public GameObject nextLevelObject;
 
+
     private void Start()
     {
         
@@ -33,7 +34,7 @@ public class Planet : MonoBehaviour
             }
         }
     }
-
+    
     private void OnMerge(bool _isMerged)
     {
         if (_isMerged)
