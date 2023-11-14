@@ -8,7 +8,9 @@ using UnityEngine;
 
 public class ShooterController : MonoBehaviour
 {
-    public List<GameObject> planetPrefab;
+    public NextPlanetManager nextPlanetManager;
+    public GameObject[] planetPrefab;
+    public int currentNumber;
 
     [SerializeField] private Transform spawnPoint;
 
@@ -55,9 +57,10 @@ public class ShooterController : MonoBehaviour
 
     private void OnShoot()
     {
-        int _randomNumber = UnityEngine.Random.Range(0, planetPrefab.Count);
-        GameObject _planet = Instantiate(planetPrefab[_randomNumber], spawnPoint.position, spawnPoint.rotation);
+        GameObject _planet = Instantiate(planetPrefab[currentNumber], spawnPoint.position, spawnPoint.rotation);
         _planet.tag = "Untagged";
         _planet.GetComponent<Rigidbody2D>().AddForce(_planet.transform.up * shootPower);
+        nextPlanetManager.isSpriteChanged = true;
+        currentNumber = UnityEngine.Random.Range(0, planetPrefab.Length);
     }
 }
