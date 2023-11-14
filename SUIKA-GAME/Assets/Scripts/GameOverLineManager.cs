@@ -25,7 +25,7 @@ public class GameOverLineManager : MonoBehaviour
         OnTimeSchedule(isChecked, endTime, warnTime, alertTime);
     }
 
-    private void OnTriggerStay2D(Collider2D _hit)
+    private void OnTriggerEnter2D(Collider2D _hit)
     {
         if (_hit.transform.CompareTag("Planet") && !isChecked)
         {
