@@ -5,9 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class GameOverLineManager : MonoBehaviour
 {
-    private SpriteRenderer spriteRederer;
-    private float overTime;
+    [SerializeField] private float endTime = 5f;
+    [SerializeField] private float warnTime = 2f;
 
+    private SpriteRenderer spriteRederer;
+    private bool isChecked;
+    private float overTime = 0;
 
     private void Start()
     {
@@ -16,42 +19,51 @@ public class GameOverLineManager : MonoBehaviour
     
     private void Update()
     {
-        Debug.Log(overTime);
+        OnTimeSchedule(isChecked, endTime, warnTime);
     }
 
-    private void OnTriggerStay2D(Collider2D _hit)
+    private void OnTriggerEnter2D(Collider2D _hit)
     {
         if (_hit.transform.CompareTag("Planet"))
         {
-            overTime += Time.deltaTime;
-
-            if (overTime > 5f)
-            {
-                OnGameOver(true);
-            }
-            if (overTime > 2f)
-            {
-                spriteRederer.color = Color.red;
-            }
-
-            Debug.Log("호출");
+            isChecked = true;
         }
     }
     private void OnTriggerExit2D(Collider2D _hit)
     {
         if (_hit.transform.CompareTag("Planet"))
         {
-            overTime = 0;
-            spriteRederer.color = Color.white;
-            Debug.Log("해제");
+            isChecked = false;
         }
     }
 
-    private void OnGameOver(bool _isOvered)
+    private void OnTimeSchedule(bool _isStabled, float _endTime, float _warnTime)
     {
-        if (_isOvered)
+        if (_isStabled)
         {
-            SceneManager.LoadScene("GameOver");
+            overTime += Time.deltaTime;
+
+            if (overTime > _endTime)
+            {
+                OnGameOver();
+            }
+            else if (overTime > _warnTime)
+            {
+                spriteRederer.color = Color.red;
+            }
+            else
+            {
+                spriteRederer.color = Color.white;
+            }
         }
+        else
+        {
+            overTime = 0;
+        }
+    }
+
+    private void OnGameOver()
+    {
+        SceneManager.LoadScene("GameOver");
     }
 }
