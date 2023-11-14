@@ -163,6 +163,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 5
   isMerged: 0
-  planetList: {fileID: 0}
-  destroyTime: 1
-  planetStorage: {fileID: 0}
+  nextLevelObject: {fileID: 5273219781472064774, guid: dfdcf420e871c5a46893fd4f4eb6fd19, type: 3}

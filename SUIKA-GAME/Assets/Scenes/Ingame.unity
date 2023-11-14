@@ -626,11 +626,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4dd6adcf3174a743a5764c06768c0c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planetList: {fileID: 1560724069}
+  planetPrefab:
+  - {fileID: 4865273816614152813, guid: e3bd8bfb57c98064bb833ab7f5e88ef0, type: 3}
+  - {fileID: 7322563488439611741, guid: 2b002d27eaedd6e419bef835398517ec, type: 3}
+  - {fileID: 3865454178533322504, guid: 3f57b9ac64225da4dae1fd4698f3d679, type: 3}
   spawnPoint: {fileID: 506372201}
   shooterSpeed: 30
-  shootPower: 1500
-  planetStorage: {fileID: 1383404551}
+  shootPower: 500
 --- !u!1 &506372200
 GameObject:
   m_ObjectHideFlags: 0
@@ -1393,86 +1395,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1383404551
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1383404552}
-  m_Layer: 0
-  m_Name: Planet
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1383404552
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1383404551}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1560724067
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1560724068}
-  - component: {fileID: 1560724069}
-  m_Layer: 0
-  m_Name: PlanetList
-  m_TagString: GameController
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1560724068
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1560724067}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1968243219}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1560724069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1560724067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 458110efa2a89bb4c8c691c0536f765c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planetPrefab:
-  - {fileID: 4865273816614152813, guid: e3bd8bfb57c98064bb833ab7f5e88ef0, type: 3}
-  - {fileID: 7322563488439611741, guid: 2b002d27eaedd6e419bef835398517ec, type: 3}
-  - {fileID: 3865454178533322504, guid: 3f57b9ac64225da4dae1fd4698f3d679, type: 3}
-  planetPrefabCount: 0
 --- !u!1 &1563990501
 GameObject:
   m_ObjectHideFlags: 0
@@ -1804,9 +1726,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1090106765}
   - {fileID: 404213858}
-  - {fileID: 1560724068}
+  - {fileID: 1090106765}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2062943644
@@ -1975,4 +1896,3 @@ SceneRoots:
   - {fileID: 1277882277}
   - {fileID: 395913545}
   - {fileID: 1968243219}
-  - {fileID: 1383404552}
