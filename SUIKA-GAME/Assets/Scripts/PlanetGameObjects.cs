@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlanetGameObjects : MonoBehaviour
 {
     public List<GameObject> planetPrefab;
-    public int planetPrefabCount;
+    public int count;
 
     private void Start()
     {
-        planetPrefabCount = planetPrefab.Count;
+        count = planetPrefab.Count;
     }
 }
