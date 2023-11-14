@@ -10,8 +10,10 @@ public class GameOverLineManager : MonoBehaviour
     [SerializeField] private float alertTime = 0.5f;
 
     private SpriteRenderer spriteRederer;
+    private GameObject hitObject;
     private bool isChecked;
     private float overTime = 0;
+
 
     private void Start()
     {
@@ -25,16 +27,18 @@ public class GameOverLineManager : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D _hit)
     {
-        if (_hit.transform.CompareTag("Planet"))
+        if (_hit.transform.CompareTag("Planet") && !isChecked)
         {
             isChecked = true;
+            hitObject = _hit.gameObject;
         }
     }
     private void OnTriggerExit2D(Collider2D _hit)
     {
-        if (_hit.transform.CompareTag("Planet"))
+        if (_hit.transform.CompareTag("Planet") && _hit.gameObject == hitObject)
         {
             isChecked = false;
+            hitObject = null;
         }
     }
 
