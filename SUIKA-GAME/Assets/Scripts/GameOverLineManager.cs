@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameOverLineManager : MonoBehaviour
 {
-    [SerializeField] private float endTime = 5f;
-    [SerializeField] private float warnTime = 2f;
+    [SerializeField] private float endTime = 6f;
+    [SerializeField] private float warnTime = 3f;
+    [SerializeField] private float alertTime = 0.5f;
 
     private SpriteRenderer spriteRederer;
     private bool isChecked;
@@ -19,7 +20,7 @@ public class GameOverLineManager : MonoBehaviour
     
     private void Update()
     {
-        OnTimeSchedule(isChecked, endTime, warnTime);
+        OnTimeSchedule(isChecked, endTime, warnTime, alertTime);
     }
 
     private void OnTriggerStay2D(Collider2D _hit)
@@ -37,7 +38,7 @@ public class GameOverLineManager : MonoBehaviour
         }
     }
 
-    private void OnTimeSchedule(bool _isStabled, float _endTime, float _warnTime)
+    private void OnTimeSchedule(bool _isStabled, float _endTime, float _warnTime, float _alertTime)
     {
         if (_isStabled)
         {
@@ -49,11 +50,15 @@ public class GameOverLineManager : MonoBehaviour
             }
             else if (overTime > _warnTime)
             {
-                spriteRederer.color = Color.red;
+                spriteRederer.color = new Color(1f, 0f, 0f, 1f);
+            }
+            else if (overTime > _alertTime)
+            {
+                spriteRederer.color = new Color(1f, 1f, 1f, 1f);
             }
             else
             {
-                spriteRederer.color = Color.white;
+                spriteRederer.color = new Color(0f, 0f, 0f, 0f);
             }
         }
         else
