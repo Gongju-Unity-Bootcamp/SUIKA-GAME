@@ -18,9 +18,9 @@ public class Planet : MonoBehaviour
         OnMerge(isMerged);
     }
 
-    private void OnCollisionStay2D(Collision2D _hit)
+    private void OnCollisionEnter2D(Collision2D _hit)
     {
-        if (_hit.collider.CompareTag("Planet"))
+        if (isMerged == false && _hit.collider.CompareTag("Planet"))
         {
             Planet _other = _hit.gameObject.GetComponent<Planet>();
             Vector3 _otherPosition = _other.transform.position;
@@ -29,7 +29,6 @@ public class Planet : MonoBehaviour
             if (nextLevelObject != null && _other.isMerged == false && _other.level == level)
             {
                 _other.isMerged = isMerged = true;
-                Destroy(_other.gameObject);
                 GameObject _nextLevelObject = Instantiate(_other.nextLevelObject, _otherPosition, _otherRotation);
             }
         }
