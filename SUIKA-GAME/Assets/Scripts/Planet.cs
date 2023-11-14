@@ -28,7 +28,7 @@ public class Planet : MonoBehaviour
 
             if (nextLevelObject != null && _other.isMerged == false && _other.level == level)
             {
-                isMerged = true;
+                _other.isMerged = isMerged = true;
                 Destroy(_other.gameObject);
                 GameObject _nextLevelObject = Instantiate(_other.nextLevelObject, _otherPosition, _otherRotation);
             }
