@@ -57,6 +57,7 @@ public class ShooterController : MonoBehaviour
     {
         int _randomNumber = UnityEngine.Random.Range(0, planetPrefab.Count);
         GameObject _planet = Instantiate(planetPrefab[_randomNumber], spawnPoint.position, spawnPoint.rotation);
+        _planet.tag = "Untagged";
         _planet.GetComponent<Rigidbody2D>().AddForce(_planet.transform.up * shootPower);
     }
 }

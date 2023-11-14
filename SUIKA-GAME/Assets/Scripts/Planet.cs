@@ -8,6 +8,7 @@ public class Planet : MonoBehaviour
     public bool isMerged;
     public GameObject nextLevelObject;
 
+    private bool isTagged;
 
     private void Start()
     {
@@ -21,6 +22,12 @@ public class Planet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D _hit)
     {
+        if (!isTagged)
+        {
+            gameObject.tag = "Planet";
+            isTagged = true;
+        }
+
         if (isMerged == false && _hit.collider.CompareTag("Planet"))
         {
             Planet _other = _hit.gameObject.GetComponent<Planet>();
