@@ -16,12 +16,10 @@ public class ShooterController : MonoBehaviour
     [SerializeField] private float shootPower = 500f;
 
     private float shooterRange = 4.3f;
-    private GameObject stuff;
 
     private void Start()
     {
-        stuff = new GameObject("Planet");
-        stuff.transform.parent = transform.parent;
+
     }
 
     private void Update()
@@ -60,6 +58,5 @@ public class ShooterController : MonoBehaviour
         int _randomNumber = UnityEngine.Random.Range(0, planetPrefab.Count);
         GameObject _planet = Instantiate(planetPrefab[_randomNumber], spawnPoint.position, spawnPoint.rotation);
         _planet.GetComponent<Rigidbody2D>().AddForce(_planet.transform.up * shootPower);
-        _planet.transform.parent = stuff.transform;
     }
 }
