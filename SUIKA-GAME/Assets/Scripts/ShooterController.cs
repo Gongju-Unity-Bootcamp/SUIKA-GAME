@@ -1,30 +1,17 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
 public class ShooterController : MonoBehaviour
 {
-    public NextPlanetManager nextPlanetManager; // NextPlanetManager에 있는 isSpriteChanged 불리언 변수에 접근하기 위해 사용
-    public GameObject[] planetPrefab; // 1레벨에서 3레벨 사이의 랜덤 행성을 생성하여 발사하기 위한 프리팹
-    public int currentNumber; // 랜덤 값 1 ~ 3레벨 사이의 랜덤 행성의 인덱스 값을 가진 정수 변수
-
+    [SerializeField] private GameObject planet; // 게임 오브젝트 형태로 planet 변수 값 지정
     [SerializeField] private Transform spawnPoint; // 슈터의 스폰 포인트로 행성을 발사하기 위한 기준이 되는 좌표
 
     [SerializeField] private float shooterSpeed = 30f; // 슈터를 마우스로 이동했을 때, 속도 실수 값
     [SerializeField] private float shootPower = 500f; // 슈터로 쏘아올린 행성의 힘 크기 실수 값
 
-    private float shooterRange = 4.3f; // 2D 환경에서의 2차원 x, y 좌표 중 x 좌표에 한해 슈터의 이동 범위 제한을 위한 범위 실수 값
+    [SerializeField] private float shooterRange = 4.3f; // 2D 환경에서의 2차원 x, y 좌표 중 x 좌표에 한해 슈터의 이동 범위 제한을 위한 범위 실수 값
+    private int currentPlanetNumber; // 랜덤 값 1 ~ 3레벨 사이의 랜덤 행성의 인덱스 값을 가진 정수 변수를 지정하기 위한 값
 
-    private void Start()
-    {
-
-    }
-
-    private void Update()
+    private void Update() // 업데이트 메소드
     {
         OnMouseCursor(); // 마우스 커서를 입력받는 메소드
         OnMouseInput(); // 마우스 버튼을 입력받는 메소드
@@ -51,20 +38,29 @@ public class ShooterController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0)) // 마우스 왼쪽 버튼을 눌렀을 때
         {
-            OnShoot(); // 발사하는 메소드를 호출한다
+            OnSetPlanet(); // 행성 초기 설정 메소드를 호출한다
         }
     }
 
-    private void OnShoot() // 발사하는 메소드
+    private void OnSetPlanet() // 행성 초기 설정 메소드
     {
-        GameObject _planet = Instantiate(planetPrefab[currentNumber], spawnPoint.position, spawnPoint.rotation);
+        GameObject _planet = Instantiate(planet, spawnPoint.position, spawnPoint.rotation);
+        // 게임 오브젝트 _planet을 스폰포인트 위치값과 스폰포인트 회전값에 생성한 뒤 개체 참조한다.
+        PlanetController _planetController = _planet.GetComponent<PlanetController>();
+        // _planet 게임 오브젝트를 _planetController 컴포넌트로 가져온다
+        _planet.tag = "Untagged"; // 행성의 태그는 Untagged(태그없음)
+        _planetController.OnPlanetInit(currentPlanetNumber);
         // 게임오브젝트인 행성은 행성프리펩 1~3번을 스폰포인트 좌표로 스폰포인트 축(회전값)으로 생성한다
 
-        _planet.tag = "Untagged"; // 행성의 태그는 Untagged(태그없음)
+        OnShoot(_planet); // 행성 발사 메소드
+    }
+
+    private void OnShoot(GameObject _planet) // 행성 발사 메소드
+    {
         _planet.GetComponent<Rigidbody2D>().AddForce(_planet.transform.up * shootPower);
         // 행성 게임 오브젝트에서 리지드바디2D 컴포넌트를 불러온 후 행성의 윗방향을 기준으로 shootPower 만큼의 힘을 가한다
-
-        nextPlanetManager.isSpriteChanged = true; 
-        currentNumber = UnityEngine.Random.Range(0, planetPrefab.Length); //1~3번의 행성을 랜덤하게 생성하기 위해 0부터 프리펩의 길이 사이의 랜덤 값을 반환
+        ShowPrevPlanetUI.OnSpriteChange(currentPlanetNumber); // 스프라이트 체인지 상태를 true로 변경
+        currentPlanetNumber = UnityEngine.Random.Range(0, PlanetDatabase.planetIndex / 3);
+        // 1~3번의 행성을 랜덤하게 생성하기 위해 0부터 프리펩의 길이 사이의 랜덤 값을 반환
     }
 }
