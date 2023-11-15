@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Planet : MonoBehaviour
 {
-    public int level;
-    public bool isMerged;
-    public GameObject nextLevelObject;
+    public int level; // 레벨 변수지정
+    public bool isMerged; // ismerged (행성을 합쳐졌는지 확인하기위해) 불리언으로 Y or N 
+    public GameObject nextLevelObject; // 다음 행성을 호출하기 위해 변수생성
 
-    private bool isTagged;
+    private bool isTagged; // isTagged를 Y or N
 
     private void Start()
     {
@@ -20,15 +20,15 @@ public class Planet : MonoBehaviour
         OnMerge(isMerged);
     }
 
-    private void OnCollisionEnter2D(Collision2D _hit)
+    private void OnCollisionEnter2D(Collision2D _hit) // rigidbody2D가 다른 rigidbody2D에 충돌하면 호출한다.
     {
-        if (!isTagged)
+        if (!isTagged) // isTagged == false
         {
-            gameObject.tag = "Planet";
-            isTagged = true;
+            gameObject.tag = "Planet"; // 본인태그를 Planet로 바꾼다.
+            isTagged = true; 
         }
 
-        if (isMerged == false && _hit.collider.CompareTag("Planet"))
+        if (isMerged == false && _hit.collider.CompareTag("Planet")) 
         {
             Planet _other = _hit.gameObject.GetComponent<Planet>();
             Vector3 _otherPosition = _other.transform.position;
