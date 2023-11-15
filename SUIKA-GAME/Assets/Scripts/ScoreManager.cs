@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    public Text text;
+    public Text scoreText;
+    public Text scoreSign;
     int score = 0;
 
     private void Start()
@@ -15,16 +16,17 @@ public class ScoreManager : MonoBehaviour
 
     private void Update()
     {
-
+        //GetScore();
     }
 
     private void GetScore()
     {
-        //score += 행성의 점수를 만든다
+        score += 10;
+        SetText();
     }
 
     private void SetText()
     {
-
+        scoreSign.text = score.ToString();
     }
 }
