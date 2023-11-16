@@ -72,11 +72,14 @@ public class GameOverLineManager : MonoBehaviour
         else
         {
             overTime = 0; // _isStable 인자가 false일 때 경과 시간을 0으로 초기화한다
+            spriteRenderer.color = new Color(0f, 0f, 0f, 0f); // 일반 상태에서는 alpha(투명도?)값을 바꿔 표시하지 않는다
         }
     }
 
     private void OnGameOver() // 게임오버 메소드
     {
+        PlayerPrefs.SetInt("Score", ScoreManager.score); // 스코어 변수를 다음 씬으로 스코어 정수 값
+        PlayerPrefs.SetString("IsScored", "true"); // 스코어 변수를 다음 씬으로 넘기기 위한 참 or 거짓 불리언 값
         SceneManager.LoadScene("GameOver"); // 게임오버 씬을 로드한다
     }
 }
