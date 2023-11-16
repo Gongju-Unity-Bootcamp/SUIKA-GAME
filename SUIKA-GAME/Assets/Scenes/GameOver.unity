@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 426026245}
   - component: {fileID: 426026244}
   m_Layer: 5
-  m_Name: FinalScore
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,7 +276,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 09c3ff8689632f944aa9280a62527b1c, type: 3}
     m_FontSize: 90
     m_FontStyle: 0
     m_BestFit: 0
@@ -1621,7 +1621,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 09c3ff8689632f944aa9280a62527b1c, type: 3}
     m_FontSize: 90
     m_FontStyle: 0
     m_BestFit: 0
@@ -1793,6 +1793,6 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1861832069}
-  - {fileID: 71068901}
   - {fileID: 716958106}
+  - {fileID: 71068901}
+  - {fileID: 1861832069}
