@@ -735,7 +735,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 920927034}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2048364654}
+        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
+        m_MethodName: OnStartClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &920927034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1024,7 +1036,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1302411070}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2048364654}
+        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
+        m_MethodName: OnQuitClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1302411070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1323,7 +1347,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1740713979}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2048364654}
+        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
+        m_MethodName: OnOptionClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1740713979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1460,8 +1496,8 @@ RectTransform:
   - {fileID: 1740713977}
   - {fileID: 1302411068}
   - {fileID: 1502812722}
-  - {fileID: 2048364651}
   - {fileID: 426026246}
+  - {fileID: 2048364651}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1653,6 +1689,7 @@ GameObject:
   - component: {fileID: 2048364651}
   - component: {fileID: 2048364653}
   - component: {fileID: 2048364652}
+  - component: {fileID: 2048364654}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1710,6 +1747,18 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!114 &2048364654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048364650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8083034a90cd064086bfe4b25982154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2099434833
 GameObject:
   m_ObjectHideFlags: 0
