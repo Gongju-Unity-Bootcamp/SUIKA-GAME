@@ -59,7 +59,7 @@ public class ShooterController : MonoBehaviour
     {
         _planet.GetComponent<Rigidbody2D>().AddForce(_planet.transform.up * shootPower);
         // 행성 게임 오브젝트에서 리지드바디2D 컴포넌트를 불러온 후 행성의 윗방향을 기준으로 shootPower 만큼의 힘을 가한다
-        currentPlanetNumber = UnityEngine.Random.Range(0, PlanetDatabase.planetIndex / 3);
+        currentPlanetNumber = Random.Range(0, PlanetDatabase.planetIndex / 3);
         // 1~3번의 행성을 랜덤하게 생성하기 위해 0부터 프리펩의 길이 사이의 랜덤 값을 반환
         ShowPrevPlanetUI.OnSpriteChange(currentPlanetNumber); // 스프라이트 체인지 상태를 true로 변경
     }

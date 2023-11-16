@@ -72,7 +72,9 @@ public class PlanetController : MonoBehaviour
         transform.rotation = _rotation; // 이 게임 오브젝트의 회전값을 충돌 오브젝트의 회전값으로 한다
         isGrowed = false; // 이 행성이 커진 상태를 다시 거짓 불리언 값으로 변경한다
 
-        OnPlanetInit(++planetIndex); 
+        int _index = ++planetIndex; // 행성 인덱스를 다음 레벨의 인덱스로 바꾼다
+        ScoreManager.OnSetScore(PlanetDatabase.planetScore[_index]); // 스코어에 해당 레벨의 행성 스코어가 가진 값을 더한다
+        OnPlanetInit(_index);
         // 다음 인덱스로 넘긴 값을 다시 OnPlanetInit() 메소드를 통해 호출하여 이 게임 오브젝트의 정보값을 수정한다
     }
 }
