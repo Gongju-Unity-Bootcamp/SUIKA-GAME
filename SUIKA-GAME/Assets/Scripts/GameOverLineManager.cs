@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -30,7 +28,7 @@ public class GameOverLineManager : MonoBehaviour
         OnTimeSchedule(isChecked, endTime, warnTime, alertTime); // 시간 딜레이를 정해 게임 오버 판정을 내리는 메소드
     }
 
-    private void OnTriggerEnter2D(Collider2D _hit) // 트리거 체크가 된 충돌체가 막 닿았을 때 실행되는 메소드
+    private void OnTriggerStay2D(Collider2D _hit) // 트리거 체크가 된 충돌체가 막 닿았을 때 실행되는 메소드
     {
         if (_hit.transform.CompareTag("Planet") && !isChecked) // 충돌한 오브젝트의 태그가 Planet이고 체크가 아직 안되어있을 때
         {
