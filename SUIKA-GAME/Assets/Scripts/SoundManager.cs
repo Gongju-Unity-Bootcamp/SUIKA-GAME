@@ -19,6 +19,8 @@ public class SoundManager : MonoBehaviour
     public Sound[] effectSound; // 효과음 사운드 소스를 지정한 배열 값으로 이 클래스 상단의 name, clip을 변수로 가진다
     public Sound backgroundSound; // 배경음 사운드 소스를 지정한 값으로 이 클래스 상단의 name, clip을 변수로 가진다
 
+    public static bool isSoundChecked; // 사운드 체크를 위한 참 or 거짓 불리언 값
+
 
     private void Awake() // 가장 최초에 한 번 실행되는 메소드
     {
@@ -37,7 +39,12 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject); // 게임 오브젝트를 파괴한다, 이는 다시 타이틀 화면으로 돌아갔을 경우 새로 생성되는 사운드 매니저를 방지하기 위함이다
         }
 
-        PlayEffect("PlanetOut"); // 사운드 이름으로 사운드 출력
+        if (!isSoundChecked) // 사운드 체크를 위한 참 or 거짓 불리언 값이 거짓이라면
+        {
+            PlayEffect("PlanetOut"); // 사운드 이름으로 사운드 출력
+            isSoundChecked = true; // 사운드 체크를 위한 참 or 거짓 불리언 값을 참으로 설정한다
+        }
+        
 
         OnVolumeChange(); // 볼륨 크기를 변경하는 메소드
     }

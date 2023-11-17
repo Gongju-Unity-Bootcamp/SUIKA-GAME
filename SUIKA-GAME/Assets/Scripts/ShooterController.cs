@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ShooterController : MonoBehaviour
@@ -6,12 +7,14 @@ public class ShooterController : MonoBehaviour
     [SerializeField] private Transform spawnPoint; // 슈터의 스폰 포인트로 행성을 발사하기 위한 기준이 되는 좌표
 
     [SerializeField] private float shooterSpeed = 100f; // 슈터를 마우스로 이동했을 때, 속도 실수 값
-    [SerializeField] private float shootPower = 500f; // 슈터로 쏘아올린 행성의 힘 크기 실수 값
-
     [SerializeField] private float shooterRange = 4.3f; // 2D 환경에서의 2차원 x, y 좌표 중 x 좌표에 한해 슈터의 이동 범위 제한을 위한 범위 실수 값
+
+    [SerializeField] private float shootPower = 500f; // 슈터로 쏘아올린 행성의 힘 크기 실수 값
+    [SerializeField] private float shootDelay = 0.4f; // 슈팅 딜레이를 조절하는 실수 값
 
     private int currentPlanetNumber; // 랜덤 값 1 ~ 3레벨 사이의 랜덤 행성의 인덱스 값을 가진 정수 변수를 지정하기 위한 값
     private float fixShooterSpeed = 10f; // 마우스 속도 보간값(마우스 속도는 0이 되면 슈터가 움직일 수 없기 때문에 설정한다)
+    private bool isShootDelayed = false;
 
     private void Start() // 스타트 메소드
     {
@@ -49,9 +52,10 @@ public class ShooterController : MonoBehaviour
 
     private void OnMouseInput() // 마우스 좌,우버튼 입력받는 메소드
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0)) // 마우스 왼쪽 버튼을 눌렀을 때
+        if (!isShootDelayed && Input.GetKeyDown(KeyCode.Mouse0)) // 마우스 왼쪽 버튼을 눌렀을 때
         {
             OnSetPlanet(); // 행성 초기 설정 메소드를 호출한다
+            StartCoroutine(OnShootDelay()); // 코루틴을 시작한다
         }
     }
 
@@ -76,5 +80,14 @@ public class ShooterController : MonoBehaviour
         currentPlanetNumber = Random.Range(0, PlanetDatabase.planetIndex / 3);
         // 1~3번의 행성을 랜덤하게 생성하기 위해 0부터 프리펩의 길이 사이의 랜덤 값을 반환
         ShowPrevPlanetUI.OnSpriteChange(currentPlanetNumber); // 스프라이트 체인지 상태를 true로 변경
+    }
+
+    private IEnumerator OnShootDelay() // 슈팅 딜레이 코루틴 메소드
+    {
+        isShootDelayed = true; // 슈팅 딜레이 상태를 참 or 거짓으로 나타낸 불리언 값으로 참으로 저장한다
+
+        yield return new WaitForSeconds(shootDelay); // shootDelay초 만큼 대기 시간을 갖는다
+
+        isShootDelayed = false; // 슈팅 딜레이 상태를 참 or 거짓으로 나타낸 불리언 값으로 거짓으로 저장한다
     }
 }
