@@ -5,7 +5,7 @@ public class ShooterAnimationController : MonoBehaviour
 {
     [SerializeField] private GameObject shooter;
     [SerializeField] private float animationDelay = 2f;
-    [SerializeField] private float shooterInitDelay = 0.75f;
+    [SerializeField] private float shooterInitDelay = 1.4f;
 
     private float fixShooterYValue = 0.09f;
     private Vector3 value = Vector3.zero;
@@ -20,7 +20,7 @@ public class ShooterAnimationController : MonoBehaviour
     {
         shooter.SetActive(!_isActive);
         gameObject.SetActive(_isActive);
-        // SoundManager.Play.PlayEffect("ShooterTakeoff");
+        SoundManager.Play.PlayEffect("ShooterTakeoff");
     }
 
     private void Update()
@@ -32,7 +32,6 @@ public class ShooterAnimationController : MonoBehaviour
     {
         if (!isLanded && transform.position == shooter.transform.position)
         {
-            // SoundManager.Play.PlayEffect("ShooterLand");
             isLanded = true;
             StartCoroutine(OnShooterInitDelay(false));
         }
@@ -50,6 +49,8 @@ public class ShooterAnimationController : MonoBehaviour
 
     private IEnumerator OnShooterInitDelay(bool _isActive)
     {
+        SoundManager.Play.PlayEffect("ShooterLand");
+
         yield return new WaitForSeconds(shooterInitDelay);
 
         shooter.SetActive(!_isActive);
