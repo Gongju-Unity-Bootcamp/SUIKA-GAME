@@ -14,6 +14,7 @@ public class FlashTextEffectUI : MonoBehaviour
     private void OnFlashText() // 플래시 텍스트 호출 메소드
     {
         flashingText = GetComponent<Text>(); // flashingText는 텍스트 컴포넌트를 불러온다
+        SoundManager.Play.PlayEffect("GameOver"); // 사운드 이름으로 사운드 출력
         StartCoroutine(FlashText()); // FlashText 메소드를 호출하여 초기화한다
     }
 

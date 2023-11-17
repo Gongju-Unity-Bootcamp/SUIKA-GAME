@@ -13,7 +13,7 @@ public class PlanetController : MonoBehaviour
 
     [HideInInspector] public bool isGrowed; // 행성이 커졌을 때를 판단하는 참 or 거짓인 불리언 값
     private bool isTagged; // 행성에 태그가 달렸는지를 판단하는 참 or 거짓인 불리언 값
-    private bool isHit;
+    private bool isHit; // 행성이 맞았을 때를 판단하는 참 or 거짓인 불리언 값
 
     public void OnPlanetInit(int _index) // 플래닛 생성(기본 정보 설정) 함수
     {
@@ -35,7 +35,7 @@ public class PlanetController : MonoBehaviour
         // 이 게임 오브젝트에 SpriteRenderer의 이미지 스프라이트를 가져온 행성 이미지 스프라이트로 지정한다
     }
 
-    private void OnCollisionEnter2D(Collision2D _hit)
+    private void OnCollisionEnter2D(Collision2D _hit) // 콜라이더가 한 번 충돌했을 때
     {
         OnPlanetHitCheck(_hit); // 행성 충돌 체크 메소드 호출
     }
@@ -87,6 +87,7 @@ public class PlanetController : MonoBehaviour
         isGrowed = false; // 이 행성이 커진 상태를 다시 거짓 불리언 값으로 변경한다
 
         int _index = ++planetIndex; // 행성 인덱스를 다음 레벨의 인덱스로 바꾼다
+        SoundManager.Play.PlayEffect("PlanetLevelUp"); // 사운드 이름으로 사운드 출력
         ScoreManager.OnSetScore(PlanetDatabase.planetScore[_index]); // 스코어에 해당 레벨의 행성 스코어가 가진 값을 더한다
         OnPlanetInit(_index);
         // 다음 인덱스로 넘긴 값을 다시 OnPlanetInit() 메소드를 통해 호출하여 이 게임 오브젝트의 정보값을 수정한다
