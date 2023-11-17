@@ -54,6 +54,8 @@ public class GameOverLineManager : MonoBehaviour
             
             if (overTime > _endTime) // overTime이 끝나는 시간 보다 클 때
             {
+                SoundManager.Play.StopSE("WarnAlert"); // 사운드 이름으로 사운드 중지
+                SoundManager.Play.PlayEffect("GameOver"); // 사운드 이름으로 사운드 출력
                 OnGameOver(); // 게임오버 메소드 호출
             }
             else if (overTime > _warnTime) // overTime이 경고 시간보다 클 때
