@@ -9,12 +9,13 @@ public class ShooterController : MonoBehaviour
     [SerializeField] private float shooterSpeed = 100f; // 슈터를 마우스로 이동했을 때, 속도 실수 값
     [SerializeField] private float shooterRange = 4.3f; // 2D 환경에서의 2차원 x, y 좌표 중 x 좌표에 한해 슈터의 이동 범위 제한을 위한 범위 실수 값
 
-    [SerializeField] private float shootPower = 500f; // 슈터로 쏘아올린 행성의 힘 크기 실수 값
-    [SerializeField] private float shootDelay = 0.4f; // 슈팅 딜레이를 조절하는 실수 값
+    [SerializeField] private float shootPower = 1500f; // 슈터로 쏘아올린 행성의 힘 크기 실수 값
+    [SerializeField] private float shootDelay = 1.2f; // 슈팅 딜레이를 조절하는 실수 값
 
     private int currentPlanetNumber; // 랜덤 값 1 ~ 3레벨 사이의 랜덤 행성의 인덱스 값을 가진 정수 변수를 지정하기 위한 값
     private float fixShooterSpeed = 10f; // 마우스 속도 보간값(마우스 속도는 0이 되면 슈터가 움직일 수 없기 때문에 설정한다)
     private bool isShootDelayed = false;
+    private GameObject stuff;
 
     private void Start() // 스타트 메소드
     {
@@ -23,6 +24,7 @@ public class ShooterController : MonoBehaviour
 
     private void OnShooterInit() // 슈터 생성 메소드
     {
+        stuff = new GameObject("Planet");
         shooterSpeed = fixShooterSpeed + shooterSpeed * PlayerPrefs.GetFloat("MouseSpeed");
         // 마우스 속도 보간으로 옵션에서 설정한 마우스 값 적용
     }
@@ -40,11 +42,11 @@ public class ShooterController : MonoBehaviour
 
         transform.Translate(new Vector3(_speed, 0, 0)); // 슈터가 좌우로만 이동하여야 하기 때문에 x값에만 스피드를 설정하고 y,z값은 고정되게 0으로 설정함
 
-        if (transform.position.x > shooterRange) // 슈터의 x좌표값이 shooterRange보다 클때
+        if (transform.position.x > shooterRange) // 슈터의 x좌표값이 shooterRange보다 클 때
         {
             transform.position = new Vector3(shooterRange, transform.position.y, 0); // 슈터의 위치를 shooterRange좌표와 슈터의 y좌표 z = 0 으로 고정한다
         }
-        if (transform.position.x < -shooterRange) // 슈터의 -x좌표값이 shooerRange보다 작을때
+        if (transform.position.x < -shooterRange) // 슈터의 -x좌표값이 shooerRange보다 작을 때
         {
             transform.position = new Vector3(-shooterRange, transform.position.y, 0); // 슈터의 위치를 shooterRange좌표와 슈터의 y좌표 z = 0 으로 고정한다 
         }
@@ -62,7 +64,8 @@ public class ShooterController : MonoBehaviour
     private void OnSetPlanet() // 행성 초기 설정 메소드
     {
         GameObject _planet = Instantiate(planet, spawnPoint.position, spawnPoint.rotation);
-        // 게임 오브젝트 _planet을 스폰포인트 위치값과 스폰포인트 회전값에 생성한 뒤 개체 참조한다.
+        // 게임 오브젝트 _planet을 스폰포인트 위치값과 스폰포인트 회전값에 생성한 뒤 개체 참조한다
+        _planet.transform.parent = stuff.transform; // 행성의 게임 오브젝트 위치를 stuff로 옮긴다
         PlanetController _planetController = _planet.GetComponent<PlanetController>();
         // _planet 게임 오브젝트를 _planetController 컴포넌트로 가져온다
         _planet.tag = "Untagged"; // 행성의 태그는 Untagged(태그없음)
@@ -75,7 +78,7 @@ public class ShooterController : MonoBehaviour
     private void OnShoot(GameObject _planet) // 행성 발사 메소드
     {
         SoundManager.Play.PlayEffect("PlanetShoot"); // 사운드 이름으로 사운드 출력
-        _planet.GetComponent<Rigidbody2D>().AddForce(_planet.transform.up * shootPower);
+        _planet.GetComponent<Rigidbody2D>().AddForce(_planet.transform.up * shootPower, ForceMode2D.Impulse);
         // 행성 게임 오브젝트에서 리지드바디2D 컴포넌트를 불러온 후 행성의 윗방향을 기준으로 shootPower 만큼의 힘을 가한다
         currentPlanetNumber = Random.Range(0, PlanetDatabase.planetIndex / 3);
         // 1~3번의 행성을 랜덤하게 생성하기 위해 0부터 프리펩의 길이 사이의 랜덤 값을 반환
