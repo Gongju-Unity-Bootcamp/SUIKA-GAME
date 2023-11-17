@@ -35,7 +35,7 @@ public class CSVReader
 
             var entry = new Dictionary<string, object>(); // 새로운 딕셔너리를 생성자를 통해 생성한 후에 entry에 생성한다
 
-            for (var j = 0; j < header.Length && j < values.Length; j++)
+            for (var j = 0; j < header.Length && j < values.Length; ++j)
                 // j를 인덱스 초기값으로 설정한 뒤 header와(&& / and 연산) values값 미만일 때까지 반복한다
             {
                 string value = values[j]; // 문자열 value에 j번 인덱스의 문자열을 저장한다

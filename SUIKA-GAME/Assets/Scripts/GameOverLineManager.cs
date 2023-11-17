@@ -51,7 +51,7 @@ public class GameOverLineManager : MonoBehaviour
         if (_isStabled) // _isStabled 인자가 true일 때
         {
             overTime += Time.deltaTime; // overTime에 Time.deltaTime 값을 계속 더해준다
-
+            
             if (overTime > _endTime) // overTime이 끝나는 시간 보다 클 때
             {
                 OnGameOver(); // 게임오버 메소드 호출
@@ -59,6 +59,7 @@ public class GameOverLineManager : MonoBehaviour
             else if (overTime > _warnTime) // overTime이 경고 시간보다 클 때
             {
                 spriteRenderer.color = new Color(1f, 0f, 0f, 1f); // 범위 표시선을 빨간색으로 지정
+                SoundManager.Play.PlayEffect("WarnAlert");
             }
             else if (overTime > _alertTime) // overTime이 알람 시간보다 클 때
             {
@@ -73,6 +74,7 @@ public class GameOverLineManager : MonoBehaviour
         {
             overTime = 0; // _isStable 인자가 false일 때 경과 시간을 0으로 초기화한다
             spriteRenderer.color = new Color(0f, 0f, 0f, 0f); // 일반 상태에서는 alpha(투명도?)값을 바꿔 표시하지 않는다
+            SoundManager.Play.StopSE("WarnAlert");
         }
     }
 

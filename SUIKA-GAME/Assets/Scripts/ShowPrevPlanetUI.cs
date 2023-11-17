@@ -15,7 +15,7 @@ public class ShowPrevPlanetUI : MonoBehaviour
 
     public void OnBlinkText() // 블링크 텍스트 호출 메소드
     {
-        preview = GetComponentInParent<Image>();
+        preview = GetComponentInParent<Image>(); // 프리뷰 이미지 스프라이트를 부모 오브젝트에서 가져온다
         blinkingText = GetComponent<Text>(); // 블링크 텍스트 컴포넌트 텍스트 지정
         StartCoroutine(BlinkText()); // 블링크 텍스트 코루틴 호출
     }
