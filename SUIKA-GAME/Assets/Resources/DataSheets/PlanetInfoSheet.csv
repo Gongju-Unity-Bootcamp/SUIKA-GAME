@@ -1,6 +1,6 @@
 Name,Level,Friction,Bounciness,ImageResource,Score,ScaleX,ScaleY,ColliderRadius
 1.Mercury,1,0.2,0,Sprites/Mercury,2,0.05,0.05,3.6
-2.Venus,2,0.2,0,Sprites/Venus,4,0.075,0.075,3.6
+2.Venus,2,0.2,0,Sprites/Venus,4,0.125,0.125,2.25
 3.Earth,3,0.2,0,Sprites/Earth,6,0.1,0.1,3.6
 4.Mars,4,0.2,0,Sprites/Mars,8,0.15,0.15,3.6
 5.Jupiter,5,0.2,0,Sprites/Jupiter,10,0.2,0.2,3.6

@@ -14,7 +14,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource[] effect; // 효과음 오디오 소스로 배열 변수 값이고 효과음은 여러 개가 존재한다
     public AudioSource background; // 배경음 오디오 소스 변수 값
 
-    public string[] playSoundName; // 사운드 이름을 지정한 문자열 변수 값
+    public string[] playSoundName; // 사운드 이름을 지정한 문자열 배열 변수 값
 
     public Sound[] effectSound; // 효과음 사운드 소스를 지정한 배열 값으로 이 클래스 상단의 name, clip을 변수로 가진다
     public Sound backgroundSound; // 배경음 사운드 소스를 지정한 값으로 이 클래스 상단의 name, clip을 변수로 가진다
@@ -45,7 +45,7 @@ public class SoundManager : MonoBehaviour
             isSoundChecked = true; // 사운드 체크를 위한 참 or 거짓 불리언 값을 참으로 설정한다
         }
         
-
+        playSoundName = new string[effectSound.Length]; // 실행 중인 사운드 이름을 effectSound 길이로 한다
         OnVolumeChange(); // 볼륨 크기를 변경하는 메소드
     }
 
@@ -106,7 +106,8 @@ public class SoundManager : MonoBehaviour
 
         for (int i = 0; i < effect.Length; ++i) // 효과음 크기를 저장한 배열의 크기만큼 반복문을 실행한다
         {
-            if (playSoundName[i] != null && playSoundName[i].Equals(_soundName)) // 실행중인 사운드 이름에 인자로 받아온 사운드 이름이 존재하면
+            if (playSoundName[i] != null && playSoundName[i].Equals(_soundName))
+                // 실행중인 사운드 이름에 인자로 받아온 사운드 이름이 존재하면
             {
                 effect[i].Stop(); // 효과음 중지 메소드를 호출한다
                 effect[i].clip = null; // 효과음 클립을 널러블로 만들어 없앤다
