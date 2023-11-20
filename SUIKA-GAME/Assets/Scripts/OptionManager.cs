@@ -41,17 +41,6 @@ public class OptionManager : MonoBehaviour
         PlayerPrefs.SetFloat("BackgroundVolume", backgroundVolume); // 배경음 크기를 지정한 값으로 저장한다
         PlayerPrefs.SetFloat("EffectVolume", effectVolume); // 효과음 크기를 지정한 값으로 저장한다
         PlayerPrefs.SetFloat("MouseSpeed", mouseSpeed); // 마우스 속도를 지정한 값으로 저장한다
-    }
-    public void OnSaveClick()
-    {
-        PlayerPrefs.SetInt("Score", 0); // 스코어 키로 스코어 변수를 찾아 삭제한다
-        OnSaveOption(); // 설정 값을 저장하는 메소드 호출
-        SoundManager.Play.PlayEffect("MouseClick"); // 사운드 이름으로 사운드 출력
-        SceneManager.LoadScene(PlayerPrefs.GetString("SceneName")); // 이전 씬을 저장한 값에서 호출하여 불러온다
-    }
-
-    public void OnCheckSceneChange()
-    {
-        SoundManager.Play.PlayEffect("SceneChange"); // 사운드 이름으로 사운드 출력
+        PlayerPrefs.Save(); // 지정 값들을 모두 저장하는 메소드 호출
     }
 }

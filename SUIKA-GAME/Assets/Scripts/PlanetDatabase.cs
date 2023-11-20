@@ -36,7 +36,7 @@ public class PlanetDatabase : MonoBehaviour
         planetScale = new Vector3[data.Count]; // 행성 크기에 대한 배열 범위(크기) 지정
         planetSprite = new Sprite[data.Count]; // 행성 이미지 스프라이트에 대한 배열 범위(크기) 지정
 
-        for (var i = 0; i < data.Count; ++i) // 행성의 총 개수 만큼의 반복문
+        for (int i = 0; i < data.Count; ++i) // 행성의 총 개수 만큼의 반복문
         {
             planetLevel[i] = int.Parse(data[i]["Level"].ToString()); // object를 문자열로 형변환한 뒤 정수로 형변환
             planetScore[i] = int.Parse(data[i]["Score"].ToString()); // object를 문자열로 형변환한 뒤 정수로 형변환

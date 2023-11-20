@@ -16,10 +16,10 @@ public class ShooterAnimationController : MonoBehaviour
         OnShooterAnimationInit(true); // 슈터 생성 메소드 인자 값으로는 활성화 여부를 확인하는 참 or 거짓인 불리언 값을 받는다
     }
 
-    private void OnShooterAnimationInit(bool _isActive) // 슈터 생성 메소드 인자 값으로는 활성화 여부를 확인하는 참 or 거짓인 불리언 값을 받는다
+    private void OnShooterAnimationInit(bool _isActived) // 슈터 생성 메소드 인자 값으로는 활성화 여부를 확인하는 참 or 거짓인 불리언 값을 받는다
     {
-        shooter.SetActive(!_isActive); // 슈터 게임 오브젝트의 인자값에서 반대값으로 설정한다
-        gameObject.SetActive(_isActive); // 슈터 에니메이션 게임 오브젝트의 인자값으로 설정한다
+        shooter.SetActive(!_isActived); // 슈터 게임 오브젝트의 인자값에서 반대값으로 설정한다
+        gameObject.SetActive(_isActived); // 슈터 에니메이션 게임 오브젝트의 인자값으로 설정한다
         SoundManager.Play.PlayEffect("ShooterTakeoff"); // 사운드 이름으로 사운드 출력
     }
 
@@ -30,7 +30,7 @@ public class ShooterAnimationController : MonoBehaviour
 
     private void OnAnimationTranslate() // 애니메이션 이동 메소드
     {
-        if (!isLanded && transform.position == shooter.transform.position)
+        if (isLanded == false && transform.position == shooter.transform.position)
             // 착륙 상태가 아니거나 슈터 에니메이션 게임 오브젝트의 위치가 슈터 게임오브젝트의 위치와 같다면
         {
             isLanded = true; // 착륙 상태를 참으로 설정한다
@@ -51,7 +51,7 @@ public class ShooterAnimationController : MonoBehaviour
         }
     }
 
-    private IEnumerator OnShooterInitDelay(bool _isActive)
+    private IEnumerator OnShooterInitDelay(bool _isActived)
         // 슈터 생성 딜레이 코루틴 메소드로 인자 값으로는 활성화 상태인 참 or 거짓 불리언 값을 받는다
     {
         SoundManager.Play.PlayEffect("ShooterLand"); // 사운드 이름으로 사운드 출력
@@ -62,7 +62,7 @@ public class ShooterAnimationController : MonoBehaviour
 
         yield return new WaitForSeconds(shooterInitDelay / 2); // shooterInitDelay / 2 실수 값 만큼 초당 딜레이 시킨다
 
-        shooter.SetActive(!_isActive); // 슈터 게임 오브젝트의 활성화 상태를 인자 값의 반대 값으로 설정한다
-        gameObject.SetActive(_isActive); // 슈터 애니메이션 게임 오브젝트의 활성화 상태를 인자 값으로 설정한다
+        shooter.SetActive(!_isActived); // 슈터 게임 오브젝트의 활성화 상태를 인자 값의 반대 값으로 설정한다
+        gameObject.SetActive(_isActived); // 슈터 애니메이션 게임 오브젝트의 활성화 상태를 인자 값으로 설정한다
     }
 }

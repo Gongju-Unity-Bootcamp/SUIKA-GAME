@@ -30,7 +30,7 @@ public class GameOverLineManager : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D _hit) // 트리거 체크가 된 충돌체가 막 닿았을 때 실행되는 메소드
     {
-        if (_hit.transform.CompareTag("Planet") && !isChecked) // 충돌한 오브젝트의 태그가 Planet이고 체크가 아직 안되어있을 때
+        if (_hit.transform.CompareTag("Planet") && isChecked == false) // 충돌한 오브젝트의 태그가 Planet이고 체크가 아직 안되어있을 때
         {
             isChecked = true; // 체크 표시를 위한 불리언 값
             hitObject = _hit.gameObject; // 충돌 오브젝트를 hitObject 변수에 저장
@@ -48,7 +48,7 @@ public class GameOverLineManager : MonoBehaviour
 
     private void OnTimeSchedule(bool _isStabled, float _endTime, float _warnTime, float _alertTime) // 시간 딜레이 함수
     {
-        if (_isStabled) // _isStabled 인자가 true일 때
+        if (_isStabled == true) // _isStabled 인자가 true일 때
         {
             overTime += Time.deltaTime; // overTime에 Time.deltaTime 값을 계속 더해준다
             

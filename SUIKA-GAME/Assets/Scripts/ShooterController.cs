@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShooterController : MonoBehaviour
@@ -12,10 +13,13 @@ public class ShooterController : MonoBehaviour
     [SerializeField] private float shootPower = 1500f; // 슈터로 쏘아올린 행성의 힘 크기 실수 값
     [SerializeField] private float shootDelay = 1.2f; // 슈팅 딜레이를 조절하는 실수 값
 
+    [SerializeField] private GameObject[] optionInterface; // 옵션 게임 오브젝트를 배열로 저장한 게임 오브젝트 변수 값
+
     private int currentPlanetNumber; // 랜덤 값 1 ~ 3레벨 사이의 랜덤 행성의 인덱스 값을 가진 정수 변수를 지정하기 위한 값
     private float fixShooterSpeed = 10f; // 마우스 속도 보간값(마우스 속도는 0이 되면 슈터가 움직일 수 없기 때문에 설정한다)
-    private bool isShootDelayed = false;
-    private GameObject stuff;
+    private bool isShootDelayed; // 슈팅 딜레이 여부를 결정하는 참 or 거짓인 불리언 값
+    private bool isStated; // 재개 또는 일시정지 상태를 지정하는 상태 참 or 거짓인 불리언 값
+    private GameObject stuff; // 게임 오브젝트를 지정한 변수 값
 
     private void Start() // 스타트 메소드
     {
@@ -24,7 +28,7 @@ public class ShooterController : MonoBehaviour
 
     private void OnShooterInit() // 슈터 생성 메소드
     {
-        stuff = new GameObject("Planet");
+        stuff = new GameObject("Planet"); // 빈 오브젝트의 이름을 Planet이라 설정한 뒤 stuff 게임 오브젝트 변수에 저장한다
         shooterSpeed = fixShooterSpeed + shooterSpeed * PlayerPrefs.GetFloat("MouseSpeed");
         // 마우스 속도 보간으로 옵션에서 설정한 마우스 값 적용
     }
@@ -33,6 +37,7 @@ public class ShooterController : MonoBehaviour
     {
         OnMouseCursor(); // 마우스 커서를 입력받는 메소드
         OnMouseInput(); // 마우스 버튼을 입력받는 메소드
+        OnKeyInput(); // 키보드 버튼을 입력받는 메소드
     }
 
     private void OnMouseCursor() // 마우스 커서 입력을 통해 슈터를 이동시키는 메소드
@@ -54,10 +59,27 @@ public class ShooterController : MonoBehaviour
 
     private void OnMouseInput() // 마우스 좌,우버튼 입력받는 메소드
     {
-        if (!isShootDelayed && Input.GetKeyDown(KeyCode.Mouse0)) // 마우스 왼쪽 버튼을 눌렀을 때
+        if (isShootDelayed == false && Input.GetKeyDown(KeyCode.Mouse0)) // 마우스 왼쪽 버튼을 눌렀을 때
         {
             OnSetPlanet(); // 행성 초기 설정 메소드를 호출한다
             StartCoroutine(OnShootDelay()); // 코루틴을 시작한다
+        }
+    }
+
+    private void OnKeyInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) // ESC 버튼을 눌렀을 때
+        {
+            if (isStated) // isStated의 불리언 값이 참이라면
+            {
+                OnResume(isStated); // 퍼즈의 인자 값으로 isStated의 반대값을 전달한다
+                isStated = false; // isStated 불리언 값을 거짓으로 설정한다
+            }
+            else // 위와 반대라면
+            {
+                OnPause(isStated); // 퍼즈의 인자 값으로 isStated를 전달한다
+                isStated = true; // isStated 불리언 값을 참으로 설정한다
+            }
         }
     }
 
@@ -92,5 +114,29 @@ public class ShooterController : MonoBehaviour
         yield return new WaitForSeconds(shootDelay); // shootDelay초 만큼 대기 시간을 갖는다
 
         isShootDelayed = false; // 슈팅 딜레이 상태를 참 or 거짓으로 나타낸 불리언 값으로 거짓으로 저장한다
+    }
+
+    private void OnResume(bool _isActive) // 재개 메소드
+    {
+        isStated = !_isActive; // 상태 값을 인자 값의 반대 값으로 설정한다
+
+        Time.timeScale = 1f; // 재개 시키는 변수
+
+        for (int i = 0; i < optionInterface.Length; i++) // 옵션 게임 오브젝트의 크기만큼 반복하는 반복문
+        {
+            optionInterface[i].SetActive(!_isActive); // 활성화 상태를 인자 값으로 설정한다
+        }
+    }
+
+    private void OnPause(bool _isActive) // 일시정지 메소드
+    {
+        isStated = !_isActive; // 상태 값을 인자값의 반대 값으로 설정한다
+
+        Time.timeScale = 0f; // 일시정지 시키는 변수
+
+        for (int i = 0; i < optionInterface.Length; i++) // 옵션 게임 오브젝트의 크기만큼 반복하는 반복문
+        {
+            optionInterface[i].SetActive(!_isActive); // 활성화 상태를 인자 값으로 설정한다
+        }
     }
 }
