@@ -65,6 +65,7 @@ public class PlanetController : MonoBehaviour
             // _other 행성이 커진 상태가 아니고 두 행성의 레벨이 동일하다면
         {
             isGrowed = _other.isGrowed = true; // 충돌 오브젝트와 이 게임 오브젝트의 행성이 커진 상태를 참 불리언 값으로 변경한다
+            ParticleManager.Show.ShowParticle("PlanetLevelUp", _otherPosition); // 파티클 이펙트 이름의 파티클을 생성
             _other.OnLevelUp(_otherPosition, _otherRotation); // 충돌 오브젝트의 레벨업(행성이 커지는 것) 메소드를 호출한다
             OnGrow(isGrowed); // 행성이 커질 때 메소드에 isGrowed 인자 값을 넘긴다
         }

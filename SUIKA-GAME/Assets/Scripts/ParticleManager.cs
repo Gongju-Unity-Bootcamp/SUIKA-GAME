@@ -7,6 +7,7 @@ public class Particle
 {
     public string name; // 파티클 이름을 문자열로 인스펙터 창에서 저장
     public ParticleSystem effect; // 파티클 게임 오브젝트를 파티클로 인스펙터 창에서 저장
+    public float delay; // 파티클 지속 시간을 실수 변수 값으로 저장
 }
 
 public class ParticleManager : MonoBehaviour
@@ -55,8 +56,10 @@ public class ParticleManager : MonoBehaviour
                     if (particleEffect[i].name.Equals(showParticleName[j]) == false) // 효과음이 실행중이지 않다면
                     {
                         GameObject _particle = Instantiate(particleEffect[i].effect.gameObject, _position, particleEffect[i].effect.transform.rotation);
+                        // 파티클 게임 오브젝트를 저장된 포지션에 맞게 생성한다
                         showParticleName[j] = _particleName; // 실행 중인 사운드 이름을 효과음 사운드 이름으로 저장한다
-                        showParticleGameObject[j] = _particle;
+                        showParticleGameObject[j] = _particle; // 실행 중인 파티클 게임 오브젝트를 파티클 게임 오브젝트로 저장한다
+                        HideParticle(particleEffect[i].name); // 파티클 숨기는 메소드 호출
 
                         return; // 아래 실행 명령어들을 무시하고 반환
                     }
@@ -79,9 +82,9 @@ public class ParticleManager : MonoBehaviour
             if (showParticleName[i] != null && showParticleName[i].Equals(_particleName) == true)
                 // 실행중인 파티클 이름에 인자로 받아온 파티클 이름이 존재하면
             {
-                showParticleName[i] = null;
-                Destroy(showParticleGameObject[i]);
-                showParticleGameObject[i] = null;
+                showParticleName[i] = null; // 실행중인 파티클 이름을 null로 만든다
+                Destroy(showParticleGameObject[i], particleEffect[i].delay); // 파티클 게임 오브젝트를 delay 만큼의 초 뒤에 파괴한다
+                showParticleGameObject[i] = null; // 실행중인 파티클 게임 오브젝트를 null로 만든다
 
                 return; // 아래 실행 명령어들을 무시하고 반환
             }
