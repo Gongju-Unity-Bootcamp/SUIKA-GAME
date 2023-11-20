@@ -39,7 +39,7 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject); // 게임 오브젝트를 파괴한다, 이는 다시 타이틀 화면으로 돌아갔을 경우 새로 생성되는 사운드 매니저를 방지하기 위함이다
         }
 
-        if (!isSoundChecked) // 사운드 체크를 위한 참 or 거짓 불리언 값이 거짓이라면
+        if (isSoundChecked == false) // 사운드 체크를 위한 참 or 거짓 불리언 값이 거짓이라면
         {
             PlayEffect("PlanetOut"); // 사운드 이름으로 사운드 출력
             isSoundChecked = true; // 사운드 체크를 위한 참 or 거짓 불리언 값을 참으로 설정한다
@@ -78,11 +78,11 @@ public class SoundManager : MonoBehaviour
 
         for (int i = 0; i < effectSound.Length; ++i) // 효과음 크기를 저장한 배열의 크기만큼 반복문을 실행한다
         {
-            if (_soundName.Equals(effectSound[i].name)) // 인자 값으로 받은 사운드 이름이 효과음 사운드 이름과 같다면
+            if (_soundName.Equals(effectSound[i].name) == true) // 인자 값으로 받은 사운드 이름이 효과음 사운드 이름과 같다면
             {
                 for (int j = 0; j < effect.Length; ++j) // 효과음 사운드 크기를 지정한 배열의 크기만큼 반복문을 실행한다
                 {
-                    if (!effect[j].isPlaying) // 효과음이 실행중이지 않다면
+                    if (effect[j].isPlaying == false) // 효과음이 실행중이지 않다면
                     {
                         playSoundName[j] = effectSound[i].name; // 실행 중인 사운드 이름을 효과음 사운드 이름으로 저장한다
                         effect[j].clip = effectSound[i].clip; // 사운드 클립을 효과음 사운드 클립으로 저장한다
@@ -106,7 +106,7 @@ public class SoundManager : MonoBehaviour
 
         for (int i = 0; i < effect.Length; ++i) // 효과음 크기를 저장한 배열의 크기만큼 반복문을 실행한다
         {
-            if (playSoundName[i] != null && playSoundName[i].Equals(_soundName))
+            if (playSoundName[i] != null && playSoundName[i].Equals(_soundName) == true)
                 // 실행중인 사운드 이름에 인자로 받아온 사운드 이름이 존재하면
             {
                 effect[i].Stop(); // 효과음 중지 메소드를 호출한다
@@ -135,7 +135,7 @@ public class SoundManager : MonoBehaviour
             return; // 아래 실행 명령어들을 무시하고 반환
         }
 
-        if (_soundName.Equals(backgroundSound.name)) // 인자 값으로 받아온 사운드 이름이 배경음 이름과 같으면
+        if (_soundName.Equals(backgroundSound.name) == true) // 인자 값으로 받아온 사운드 이름이 배경음 이름과 같으면
         {
             background.clip = backgroundSound.clip; // 배경음 사운드 클립을 배경음 클립으로 저장한다
             background.Play(); // 배경음 실행
@@ -149,7 +149,7 @@ public class SoundManager : MonoBehaviour
             return; // 아래 실행 명령어들을 무시하고 반환
         }
 
-        if (background.isPlaying && _soundName.Equals(backgroundSound.name))
+        if (background.isPlaying == true && _soundName.Equals(backgroundSound.name) == true)
             // 배경음이 실행 중이고 인자값으로 받아온 사운드 이름이 배경음 사운드 이름과 동일하면
         {
             background.Stop(); // 배경음 중지 메소드 호출

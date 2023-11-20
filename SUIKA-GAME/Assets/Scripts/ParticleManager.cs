@@ -52,7 +52,7 @@ public class ParticleManager : MonoBehaviour
             {
                 for (int j = 0; j < showParticleName.Length; ++j) // 효과음 사운드 크기를 지정한 배열의 크기만큼 반복문을 실행한다
                 {
-                    if (!particleEffect[i].name.Equals(showParticleName[j])) // 효과음이 실행중이지 않다면
+                    if (particleEffect[i].name.Equals(showParticleName[j]) == false) // 효과음이 실행중이지 않다면
                     {
                         GameObject _particle = Instantiate(particleEffect[i].effect.gameObject, _position, particleEffect[i].effect.transform.rotation);
                         showParticleName[j] = _particleName; // 실행 중인 사운드 이름을 효과음 사운드 이름으로 저장한다
@@ -76,7 +76,7 @@ public class ParticleManager : MonoBehaviour
 
         for (int i = 0; i < particleEffect.Length; ++i) // 파티클 크기를 저장한 배열의 크기만큼 반복문을 실행한다
         {
-            if (showParticleName[i] != null && showParticleName[i].Equals(_particleName))
+            if (showParticleName[i] != null && showParticleName[i].Equals(_particleName) == true)
                 // 실행중인 파티클 이름에 인자로 받아온 파티클 이름이 존재하면
             {
                 showParticleName[i] = null;

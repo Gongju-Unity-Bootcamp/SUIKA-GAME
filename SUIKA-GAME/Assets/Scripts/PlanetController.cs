@@ -13,7 +13,6 @@ public class PlanetController : MonoBehaviour
 
     [HideInInspector] public bool isGrowed; // 행성이 커졌을 때를 판단하는 참 or 거짓인 불리언 값
     private bool isTagged; // 행성에 태그가 달렸는지를 판단하는 참 or 거짓인 불리언 값
-    private bool isHit; // 행성이 맞았을 때를 판단하는 참 or 거짓인 불리언 값
 
     public void OnPlanetInit(int _index) // 플래닛 생성(기본 정보 설정) 함수
     {
@@ -37,7 +36,10 @@ public class PlanetController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D _hit) // 콜라이더가 한 번 충돌했을 때
     {
-        OnPlanetHitCheck(_hit); // 행성 충돌 체크 메소드 호출
+        if (isGrowed == false && _hit.collider.CompareTag("Planet")) // 이 행성이 커진 상태가 아니고 충돌 게임 오브젝트의 태그가 Planet이라면
+        {
+            OnPlanetHitCheck(_hit);// 행성 충돌 체크 메소드 호출
+        }
     }
 
     private void OnCollisionStay2D(Collision2D _hit) // 콜라이더가 계속 충돌 중일 때
@@ -47,28 +49,24 @@ public class PlanetController : MonoBehaviour
             gameObject.tag = "Planet"; // 이 게임 오브젝트의 태그를 Planet으로 변경한다
             isTagged = true; // 태그 지정 여부를 알기 위해 불리언 값을 참으로 설정한다
         }
-
-        OnPlanetHitCheck(_hit);// 행성 충돌 체크 메소드 호출
+        if (isGrowed == false && _hit.collider.CompareTag("Planet")) // 이 행성이 커진 상태가 아니고 충돌 게임 오브젝트의 태그가 Planet이라면
+        {
+            OnPlanetHitCheck(_hit);// 행성 충돌 체크 메소드 호출
+        }
     }
 
     private void OnPlanetHitCheck(Collision2D _hit) // 행성 충돌 체크 메소드
     {
-        if ((isHit && isGrowed) == false && _hit.collider.CompareTag("Planet")) // 행성이 커진 상태가 아니고 충돌한 오브젝트의 태그가 Planet(행성) 이라면
+        PlanetController _other = _hit.gameObject.GetComponent<PlanetController>(); // 행성 컨트롤러를 충돌 오브젝트에서 가져온다
+        Vector3 _otherPosition = _other.transform.position; // 충돌 오브젝트의 위치값을 가져온다
+        Quaternion _otherRotation = _other.transform.rotation; // 충돌 오브젝트의 회전값을 가져온다
+
+        if (_other.isGrowed == false && _other.planetLevel == planetLevel)
+            // _other 행성이 커진 상태가 아니고 두 행성의 레벨이 동일하다면
         {
-            isHit = true; // 히트 상태를 알려주는 참 or 거짓 불리언 값으로 true로 설정한다
-            PlanetController _other = _hit.gameObject.GetComponent<PlanetController>(); // 행성 컨트롤러를 충돌 오브젝트에서 가져온다
-            Vector3 _otherPosition = _other.transform.position; // 충돌 오브젝트의 위치값을 가져온다
-            Quaternion _otherRotation = _other.transform.rotation; // 충돌 오브젝트의 회전값을 가져온다
-
-            if (_other.isGrowed == false && _other.planetLevel == planetLevel)
-            // 충돌 오브젝트와 이 게임 오브젝트의 행성이 커진 상태 여부와 각각의 레벨이 같은지를 확인한다
-            {
-                _other.isGrowed = isGrowed = true; // 충돌 오브젝트와 이 게임 오브젝트의 행성이 커진 상태를 참 불리언 값으로 변경한다
-                OnGrow(isGrowed); // 행성이 커질 때 메소드를 호출한다
-                _other.OnLevelUp(_otherPosition, _otherRotation); // 충돌 오브젝트의 레벨업(행성이 커지는 것) 메소드를 호출한다
-            }
-
-            isHit = false; // 히트 상태를 알려주는 참 or 거짓 불리언 값으로 false로 설정한다
+            isGrowed = _other.isGrowed = true; // 충돌 오브젝트와 이 게임 오브젝트의 행성이 커진 상태를 참 불리언 값으로 변경한다
+            _other.OnLevelUp(_otherPosition, _otherRotation); // 충돌 오브젝트의 레벨업(행성이 커지는 것) 메소드를 호출한다
+            OnGrow(isGrowed); // 행성이 커질 때 메소드에 isGrowed 인자 값을 넘긴다
         }
     }
 
@@ -80,11 +78,11 @@ public class PlanetController : MonoBehaviour
         }
     }
 
-    private void OnLevelUp(Vector3 _position, Quaternion _rotation) // 레벨업(행성이 커지는 것) 메소드
+    public void OnLevelUp(Vector3 _position, Quaternion _rotation) // 레벨업(행성이 커지는 것) 메소드
     {
         transform.position = _position; // 이 게임 오브젝트의 위치값을 충돌 오브젝트의 위치값으로 한다
         transform.rotation = _rotation; // 이 게임 오브젝트의 회전값을 충돌 오브젝트의 회전값으로 한다
-        isGrowed = false; // 이 행성이 커진 상태를 다시 거짓 불리언 값으로 변경한다
+        isGrowed = false; // 이 행성이 커진 상태를 거짓 불리언 값으로 변경한다
 
         int _index = ++planetIndex; // 행성 인덱스를 다음 레벨의 인덱스로 바꾼다
         SoundManager.Play.PlayEffect("PlanetLevelUp"); // 사운드 이름으로 사운드 출력
