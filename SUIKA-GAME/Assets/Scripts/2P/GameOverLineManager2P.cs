@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameOverLineManager : MonoBehaviour
+public class GameOverLineManager2P : MonoBehaviour
 {
+    [SerializeField] private GameObject shooter; // 슈터 게임 오브젝트를 저장하기 위한 값
     [SerializeField] private float endTime = 6f; // 끝나는 시간을 정하기 위한 실수 값
     [SerializeField] private float warnTime = 3f; // 경고 시간을 정하기 위한 실수 값
     [SerializeField] private float alertTime = 0.5f; // 알람 시간을 정하기 위한 실수 값
@@ -84,6 +85,7 @@ public class GameOverLineManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("Score", ScoreManager.score); // 스코어 변수를 다음 씬으로 스코어 정수 값
         PlayerPrefs.SetString("IsScored", "true"); // 스코어 변수를 다음 씬으로 넘기기 위한 참 or 거짓 불리언 값
-        SceneManager.LoadScene("GameOver"); // 게임오버 씬을 로드한다
+        ParticleManager.Show.ShowParticle("PlanetLevelUp", shooter.transform.position); // 파티클 이펙트 이름의 파티클을 생성
+        shooter.SetActive(false); // 슈터 게임 오브젝트를 거짓으로 변경한다
     }
 }
