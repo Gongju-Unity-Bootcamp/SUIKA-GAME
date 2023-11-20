@@ -97,7 +97,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void StopSE(string _soundName) // 효과음 중지 메소드
+    public void StopEffect(string _soundName) // 효과음 중지 메소드
     {
         if (_soundName == null) // 사운드 이름이 존재하지 않다면
         {
@@ -112,13 +112,11 @@ public class SoundManager : MonoBehaviour
                 effect[i].Stop(); // 효과음 중지 메소드를 호출한다
                 effect[i].clip = null; // 효과음 클립을 널러블로 만들어 없앤다
                 playSoundName[i] = null; // 실행중인 사운드 이름을 널러블로 만들어 없앤다
-
-                return; // 아래 실행 명령어들을 무시하고 반환
             }
         }
     }
 
-    public void StopAllSE() // 모든 효과음 중지 메소드
+    public void StopAllEffect() // 모든 효과음 중지 메소드
     {
         for (int i = 0; i < effect.Length; ++i) // 효과음 크기를 저장한 배열의 크기만큼 반복문을 실행한다
         {

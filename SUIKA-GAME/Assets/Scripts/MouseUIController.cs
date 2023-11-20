@@ -20,6 +20,6 @@ public class MouseUIController : MonoBehaviour, IPointerClickHandler, IDragHandl
 
     public void OnPointerExit(PointerEventData _eventData) // 마우스 포인터가 UI 오브젝트에서 나갔을 때 메소드
     {
-        SoundManager.Play.StopSE("MouseCursor"); // 사운드 이름으로 사운드 출력
+        SoundManager.Play.StopEffect("MouseCursor"); // 사운드 이름으로 사운드 출력
     }
 }

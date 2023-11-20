@@ -14,7 +14,7 @@ public class ShooterController2P : MonoBehaviour
     [SerializeField] private float shootDelay = 1.2f; // 슈팅 딜레이를 조절하는 실수 값
 
     private int currentPlanetNumber; // 랜덤 값 1 ~ 3레벨 사이의 랜덤 행성의 인덱스 값을 가진 정수 변수를 지정하기 위한 값
-    private float fixShooterSpeed = 10f; // 마우스 속도 보간값(마우스 속도는 0이 되면 슈터가 움직일 수 없기 때문에 설정한다)
+    private float fixShooterSpeed = 10f; // 키보드 속도 보간값(마우스 속도는 0이 되면 슈터가 움직일 수 없기 때문에 설정한다)
     private bool isShootDelayed; // 슈팅 딜레이 여부를 결정하는 참 or 거짓인 불리언 값
     private GameObject stuff; // 게임 오브젝트를 지정한 변수 값
 

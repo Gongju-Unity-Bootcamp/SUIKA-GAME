@@ -12,9 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Ingame.unity
     guid: 322434a6558138049b6cbc3d91e514b8
   - enabled: 1
+    path: Assets/Scenes/Ingame2P.unity
+    guid: 252305af894a0ae41b36e92b2a0f5147
+  - enabled: 1
     path: Assets/Scenes/Option.unity
     guid: fcb3d986cf303804fa2bbbab4d419918
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 394fe9ed023bec845bc6a9c7c6be5f93
+  - enabled: 1
+    path: Assets/Scenes/PlayerWin.unity
+    guid: 71c6ed6377984674b91e64d9c8becb05
   m_configObjects: {}

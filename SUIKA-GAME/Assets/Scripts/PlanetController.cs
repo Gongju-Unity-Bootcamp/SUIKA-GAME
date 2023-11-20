@@ -88,6 +88,7 @@ public class PlanetController : MonoBehaviour
 
         int _index = ++planetIndex; // 행성 인덱스를 다음 레벨의 인덱스로 바꾼다
         SoundManager.Play.PlayEffect("PlanetLevelUp"); // 사운드 이름으로 사운드 출력
+
         if (is2Played)
         {
             ScoreManager2P.OnSetScore(PlanetDatabase.planetScore[_index]); // 스코어에 해당 레벨의 행성 스코어가 가진 값을 더한다
@@ -96,6 +97,7 @@ public class PlanetController : MonoBehaviour
         {
             ScoreManager.OnSetScore(PlanetDatabase.planetScore[_index]); // 스코어에 해당 레벨의 행성 스코어가 가진 값을 더한다
         }
+
         OnPlanetInit(_index);
         // 다음 인덱스로 넘긴 값을 다시 OnPlanetInit() 메소드를 통해 호출하여 이 게임 오브젝트의 정보값을 수정한다
     }

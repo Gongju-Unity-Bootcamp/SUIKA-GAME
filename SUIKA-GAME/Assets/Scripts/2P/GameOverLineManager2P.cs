@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameOverLineManager2P : MonoBehaviour
 {
@@ -11,6 +10,7 @@ public class GameOverLineManager2P : MonoBehaviour
     private SpriteRenderer spriteRenderer; // 스프라이트 랜더러 컴포넌트를 가져오기 위한 변수 값
     private GameObject hitObject; // 충돌된 게임 오브젝트를 저장하기 위한 값
     private bool isChecked; // 체크 확인 여부를 저장한 불리언 값
+    private bool isOvered; // 게임 오버 상태를 체크하는 불리언 값
     private float overTime = 0; // 경과 시간을 담을 실수 값
 
 
@@ -52,17 +52,18 @@ public class GameOverLineManager2P : MonoBehaviour
         if (_isStabled == true) // _isStabled 인자가 true일 때
         {
             overTime += Time.deltaTime; // overTime에 Time.deltaTime 값을 계속 더해준다
-            
-            if (overTime > _endTime) // overTime이 끝나는 시간 보다 클 때
+
+            if (isOvered == false && overTime > _endTime) // overTime이 끝나는 시간 보다 클 때
             {
-                SoundManager.Play.StopSE("WarnAlert"); // 사운드 이름으로 사운드 중지
+                SoundManager.Play.StopEffect("WarnAlert2"); // 사운드 이름으로 사운드 중지
                 SoundManager.Play.PlayEffect("GameOver"); // 사운드 이름으로 사운드 출력
                 OnGameOver(); // 게임오버 메소드 호출
+                isOvered = true;
             }
-            else if (overTime > _warnTime) // overTime이 경고 시간보다 클 때
+            else if (isOvered == false && overTime > _warnTime) // overTime이 경고 시간보다 클 때
             {
                 spriteRenderer.color = new Color(1f, 0f, 0f, 1f); // 범위 표시선을 빨간색으로 지정
-                SoundManager.Play.PlayEffect("WarnAlert");
+                SoundManager.Play.PlayEffect("WarnAlert2");
             }
             else if (overTime > _alertTime) // overTime이 알람 시간보다 클 때
             {
@@ -77,14 +78,14 @@ public class GameOverLineManager2P : MonoBehaviour
         {
             overTime = 0; // _isStable 인자가 false일 때 경과 시간을 0으로 초기화한다
             spriteRenderer.color = new Color(0f, 0f, 0f, 0f); // 일반 상태에서는 alpha(투명도?)값을 바꿔 표시하지 않는다
-            SoundManager.Play.StopSE("WarnAlert");
+            SoundManager.Play.StopEffect("WarnAlert2"); // 사운드 이름으로 사운드 중지
         }
     }
 
     private void OnGameOver() // 게임오버 메소드
     {
-        PlayerPrefs.SetInt("Score", ScoreManager.score); // 스코어 변수를 다음 씬으로 스코어 정수 값
-        PlayerPrefs.SetString("IsScored", "true"); // 스코어 변수를 다음 씬으로 넘기기 위한 참 or 거짓 불리언 값
+        PlayerPrefs.SetInt("Score2P", ScoreManager.score); // 스코어 변수를 다음 씬으로 스코어 정수 값
+        PlayerPrefs.SetString("IsScored2P", "true"); // 스코어 변수를 다음 씬으로 넘기기 위한 참 or 거짓 불리언 값
         ParticleManager.Show.ShowParticle("PlanetLevelUp", shooter.transform.position); // 파티클 이펙트 이름의 파티클을 생성
         shooter.SetActive(false); // 슈터 게임 오브젝트를 거짓으로 변경한다
     }
