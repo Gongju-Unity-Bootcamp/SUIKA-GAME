@@ -230,7 +230,7 @@ Transform:
   m_GameObject: {fileID: 70393102}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.5, y: -3.5, z: 0}
+  m_LocalPosition: {x: -5.5, y: -3.5, z: 0}
   m_LocalScale: {x: 60, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -926,7 +926,7 @@ Transform:
   m_GameObject: {fileID: 241837596}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.5, y: -5, z: 0}
+  m_LocalPosition: {x: -5.5, y: -5, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1000,8 +1000,8 @@ MonoBehaviour:
   planet: {fileID: 8035873510462739626, guid: 0d9644694b06411449a38018eb5e3cae, type: 3}
   spawnPoint: {fileID: 1463216733}
   shooterSpeed: 100
-  shooterMinRange: 2.4
-  shooterMaxRange: 8.4
+  shooterMinRange: -8.4
+  shooterMaxRange: -2.4
   shootPower: 1500
   shootDelay: 1.2
 --- !u!1 &247158827
@@ -1202,7 +1202,7 @@ Transform:
   m_GameObject: {fileID: 281485609}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.5, y: -3.5, z: 0}
+  m_LocalPosition: {x: 5.5, y: -3.5, z: 0}
   m_LocalScale: {x: 60, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1348,7 +1348,7 @@ Transform:
   m_GameObject: {fileID: 293243536}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.5, y: -5, z: 0}
+  m_LocalPosition: {x: 5.5, y: -5, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1370,8 +1370,8 @@ MonoBehaviour:
   planet: {fileID: 8035873510462739626, guid: 0d9644694b06411449a38018eb5e3cae, type: 3}
   spawnPoint: {fileID: 1944898811}
   shooterSpeed: 100
-  shooterMinRange: -8.4
-  shooterMaxRange: -2.4
+  shooterMinRange: 2.4
+  shooterMaxRange: 8.4
   shootPower: 1500
   shootDelay: 1.2
 --- !u!212 &293243539
@@ -1453,7 +1453,7 @@ Transform:
   m_GameObject: {fileID: 309565109}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: -5.5, y: 10, z: 0}
+  m_LocalPosition: {x: 5.5, y: 10, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4350,6 +4350,11 @@ MonoBehaviour:
   - {fileID: 241837596}
   - {fileID: 309565109}
   - {fileID: 1937555295}
+  player1P: {fileID: 0}
+  player2P: {fileID: 0}
+  playerDraw: {fileID: 0}
+  isDrawChecked: 0
+  isGameOverChecked: 1
 --- !u!1 &1325897450
 GameObject:
   m_ObjectHideFlags: 0
@@ -5480,7 +5485,7 @@ Transform:
   m_GameObject: {fileID: 1937555295}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 5.5, y: 10, z: 0}
+  m_LocalPosition: {x: -5.5, y: 10, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

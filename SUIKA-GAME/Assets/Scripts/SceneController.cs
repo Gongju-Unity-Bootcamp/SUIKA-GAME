@@ -6,6 +6,7 @@ public class SceneController : MonoBehaviour
     public void OnStartClick() // 스타트 버튼을 눌렀을 때의 메소드
     {
         PlayerPrefs.SetInt("Score", 0); // 스코어 키로 스코어 변수를 찾아 삭제한다
+        PlayerPrefs.SetInt("Score2P", 0); // 스코어 키로 스코어 변수를 찾아 삭제한다
         SoundManager.Play.PlayEffect("MouseClick"); // 사운드 이름으로 사운드 출력
         SceneManager.LoadScene("Ingame"); // 인게임 씬을 로드한다
     }
