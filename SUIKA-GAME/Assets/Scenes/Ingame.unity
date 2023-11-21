@@ -3186,6 +3186,11 @@ MonoBehaviour:
   shooter:
   - {fileID: 293243536}
   - {fileID: 309565109}
+  player1P: {fileID: 0}
+  player2P: {fileID: 0}
+  playerDraw: {fileID: 0}
+  isDrawChecked: 0
+  isGameOverChecked: 1
 --- !u!1 &1325897450
 GameObject:
   m_ObjectHideFlags: 0

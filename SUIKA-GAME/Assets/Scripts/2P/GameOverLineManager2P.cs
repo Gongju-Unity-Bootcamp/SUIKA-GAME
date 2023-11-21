@@ -84,7 +84,7 @@ public class GameOverLineManager2P : MonoBehaviour
 
     private void OnGameOver() // 게임오버 메소드
     {
-        PlayerPrefs.SetInt("Score2P", ScoreManager.score); // 스코어 변수를 다음 씬으로 스코어 정수 값
+        PlayerPrefs.SetInt("Score2P", ScoreManager2P.score); // 스코어 변수를 다음 씬으로 스코어 정수 값
         PlayerPrefs.SetString("IsScored2P", "true"); // 스코어 변수를 다음 씬으로 넘기기 위한 참 or 거짓 불리언 값
         ParticleManager.Show.ShowParticle("PlanetLevelUp", shooter.transform.position); // 파티클 이펙트 이름의 파티클을 생성
         shooter.SetActive(false); // 슈터 게임 오브젝트를 거짓으로 변경한다
