@@ -2208,7 +2208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &922556711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3189,6 +3189,7 @@ MonoBehaviour:
   player1P: {fileID: 0}
   player2P: {fileID: 0}
   playerDraw: {fileID: 0}
+  player2PScore: {fileID: 0}
   isDrawChecked: 0
   isGameOverChecked: 1
 --- !u!1 &1325897450
